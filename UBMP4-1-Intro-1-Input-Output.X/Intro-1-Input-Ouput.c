@@ -53,7 +53,23 @@ int main(void)
         }
         
         // Add code for your Program Analysis and Programming Activities here:
-
+     // Momentary button using if structure
+        // Nested if 'AND' code
+        if(SW3 == 0)
+        {
+            if(SW4 == 0)
+            {
+                LED4 = 1;
+            }
+            else
+            {
+                LED4 = 0;
+            }
+        }
+        else
+        {
+            LED4 = 0;
+        }
         // Activate bootloader if SW1 is pressed.
         if(SW1 == 0)
         {
@@ -67,20 +83,23 @@ int main(void)
  * 1. How many times do the LEDs flash if SW2 is quickly pressed and released?
  *    Do the LEDs keep flashing when SW2 is held? Look at the program and
  *    explain why this happens when SW2 is held.
- * 
+ * The LED's flash once in a clockwise pattern if SW2 is quickly pressed and released. 
+ However, when SW2 is held the pattern continues to flow until the button is released because it is a loop.  
+ The loop consists of each LED lighting up in a row with a delay between each, then turning off. Then, it repeats.
  * 2. Explain the difference between the statements: LED3 = 0; and LED3 = 1;
- * 
+ * The difference between the statements LED3 = 0 and LED3 = 1 is that when LED3 = 0, the LED does not flash, but when LED3 = 1, it commands the LED to flash.
  * 3. What voltage do you expect the microcontroller to output to LED D3 when
  *    the statement LED3 = 0; runs? What voltage do you expect the output to be
  *    when the statement LED3 = 1; runs?
- * 
+ * When LED3 = 0, I expect the microcontroller to ouput 0 volts because it is assigning the LED to not flash,
+ but when LED3 = 1 I expect the microcontroller to output 1-2 volts.
  *    You can confirm the output voltage with a voltmeter if you have access
  *    to one. If you tried that, did the voltage match your prediction?
- * 
+ * The voltage did match my prediction of 1-2 volts, since the output voltage was approximately 1.9 volts.
  * 4. The statement 'if(SW2 == 0)' uses two equal signs, while the statement
  *    'LED3 = 1;' uses a single equal sign. What operation is performed by one
  *    equal sign? What operation is performed by two equal signs?
- * 
+ * The operation performed by one equal sign giving it a desired value, such as 0 or 1. While two equal signs mean if SW2 is 0, which is being used as a conditional operation.
  * 5. The following program code includes instructions that write to the PORTC
  *    output latches directly. Try it by copying and pasting this code below
  *    the existing SW2 'if' structure, at the location shown by the comment.
@@ -96,7 +115,9 @@ int main(void)
  *    What happens when pushbutton SW3 is pressed? Identify at least one
  *    advantage and one disadvantage of controlling the LEDs using 'LATC' writes
  *    rather than through individual 'LEDn = x;' statements.
- * 
+ * When SW3 is quickly pressed, all four LED's light up and blink, but when SW3 is held the LED's begin to continously blink.
+ Advantages of this are that you are all to write shorter code to save space and that you are able to control all four LED's at once.
+ However, a disadvantage of this is that you are unable to individually control each LED to make different patterns and assign each LED to perform something else.
  * 6. Next, compare the operation of 'if' and 'while' structures to simulate
  *    momentary buttons. Replace the code you added in 5, above, with this code:
 
@@ -121,12 +142,15 @@ int main(void)
  * 
  *    Next, press and hold SW3 while pressing and releasing SW4. Does it work
  *    as expected?
- * 
+ * Yes, it does work as expected because both work one at a time without any other button being pressed. Additionally, holding SW3 while pressing SW4 also works because SW3 is an if statement,
+ so it allows SW4 to work.
  *    Next, try press and holding SW4 while pressing and releasing SW3. Does it
  *    work as expected? Explain the difference in operation between the 'if' and
  *    'while' structures making up the momentary button code.
+ * Yes, it also works as expected since SW3 will not flash because SW4 is a while loop which will run until it is released. It does not allow another code to be run.
+ If statements are simply conditional operations that can run while also allowing another operation like SW4 to run, but SW4 is a continous running operation.
  * 
- * 7. Let's explore logical conditions using 'if' statements. Replace the code
+ 7. Let's explore logical conditions using 'if' statements. Replace the code
  *    added in 6, above, with this nested if code to make a logical AND
  *    condition that will light LED D4 only if both SW3 and SW4 are pressed:
 
@@ -149,8 +173,10 @@ int main(void)
 
  *    Test the code to ensure it works as expected. Does the order of the if
  *    conditions matter? (eg. swap the conditional checks for SW3 and SW4)
- * 
- * 8. Next, replace the code from 7 with the following code which implements a
+ * It does work as expected, but the order of the if conditions does matter because the first version is a nested code which only runs when SW3 == 0, but if the "if" conditions are swapped,
+ the first code will run first.
+ *
+  8. Next, replace the code from 7 with the following code which implements a
  *    logical AND conditional operator composed of two ampersands '&&':
  
         // Conditional 'AND' code
