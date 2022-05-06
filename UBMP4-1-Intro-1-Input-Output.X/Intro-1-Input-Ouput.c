@@ -27,37 +27,19 @@ int main(void)
     
 
      // If SW2 is pressed, make a flashy light pattern
-   if(SW2 == 0)
-     {
-         LED3 = 1;
-         __delay_ms(4205);
-         LED4 = 1;
-         __delay_ms(500);
-         LED5 = 1;
-         __delay_ms(1000);
-         LED6 = 1;
-         __delay_ms(500);
-         LED3 = 0;
-         __delay_ms(100);
-         LED4 = 0;
-         __delay_ms(100);
-         LED5 = 0;
-         __delay_ms(100);
-         LED6 = 0;
-         __delay_ms(100);
-     }
+ 
 
 
      // Add code for your Program Analysis and Programming Activities here:
-
     
      // Activate bootloader if SW1 is pressed.
      if(SW1 == 0)
      {
          RESET();
      }
+  }
  }
-}
+
 
 /* Learn More - Program Analysis Activities
 *
@@ -104,10 +86,9 @@ The operation performed by one equal sign is giving it a desired value, such as 
 *    advantage and one disadvantage of controlling the LEDs using 'LATC' writes
 *    rather than through individual 'LEDn = x;' statements.
 *
- When SW3 is quickly pressed all four LED's light up and blink, but when SW3 is held the LED's begin to continously blink.
-Advantages of this are that you are all to write shorter code to save space and that you are able to control multiple LED's at once.
-However, a disadvantages of this is that you are unable to individually control each LED to make different patterns and assign each LED to perform something else.
-Plus, you are unable to turn off the flashing unless another switch is pressed or the board is reset.
+One disadvantage of controlling the LED's using LATC writes is that it is more difficult to read and understand when first viewed, rather than referring to assigning each LED strict values by using LEDx = ' '.
+However, an advantage is that it provides better control over what commands it assigns, which allows better control over the states of the LED's. 
+This is accomplished by actually having the ability to set LATC bits to specific values. 
 * 
 6. Next, compare the operation of 'if' and 'while' structures to simulate
 *    momentary buttons. Replace the code you added in 5, above, with this code:
@@ -261,8 +242,8 @@ If the delay value is made smaller, the pitch increases and if the delay value i
 *    code, can you think of one or more disadvantages based on its output when
 *    the button is released?
 
-One or more disadvantages based on its output is that you are unable to change the pitch more precisely compared to when you are using BEEPER = 1 and BEEPER = 2.
-It is simply one output, rather than two. Thus, it will be more difficult to produce songs or notes with the NOT operator '!'.
+One or more disadvantages based on its output is that it is difficult to control the value/status of the BEEPER. 
+It is much simpler and easier to control the status of the BEEPER by setting it to = 0 or = 1, because it strictly sets the beeper to a desired value.
 *
 * 4. Using modified versions of the original SW2 'if' structure, create a
 *    program that makes a unique LED flashing pattern for each pushbutton.
@@ -271,31 +252,31 @@ It is simply one output, rather than two. Thus, it will be more difficult to pro
 *    one button is held. Do all of the patterns try to flash the LEDs at the
 *    same time, or sequentially? Explain why this is.
         
-The patterns flash the LED's sequentially in a clockwise or counter clockwise pattern, depending on the assigned buttons for each LED. For example, if I hold down SW2, SW3, and SW4,
-the LED's will flash in a decreasing pattern, such as LED5, LED4, and LED3. Ultimately, it occurs because of the sequence of the code since C outputs the code going from top to bottom,
-so the sequence makes sense.
+The LED's will flash in a way that matches the code sequentially because the code is read from top to bottom. It depends on which button is pressed first. 
+For example, if held SW2, SW3, and SW4 at the same time but press SW3 first, it will complete the assignments of the button then run sequentially in the top to bottom order. 
+LED4 first, then LED5, and LED3, then and sequentially from LED3 to LED4 to LED5.
 
-        if(SW2 == 0)
+if(SW2 == 0)
      {
-         LED5 = 1;
+         LED3 = 1;
          __delay_ms(3700);
-         LED5 = 0;
+         LED3 = 0;
          __delay_ms(2300);
-         LED5 = 1;
+         LED3 = 1;
          __delay_ms(2600);
-         LED5 = 0;
+         LED3 = 0;
          __delay_ms(2400);
-         LED5 = 1;
+         LED3 = 1;
          __delay_ms(1500);
-         LED5 = 0;
+         LED3 = 0;
          __delay_ms(2500);
-         LED5 = 1;
+         LED3 = 1;
          __delay_ms(400);
-         LED5 = 0;
+         LED3 = 0;
          __delay_ms(2600);
-         LED5 = 1;
+         LED3 = 1;
          __delay_ms(30);
-         LED5 = 0;
+         LED3 = 0;
          __delay_ms(2700);
      }
  
@@ -336,25 +317,24 @@ so the sequence makes sense.
      }
        if(SW4 == 0)
      {
-         LED3 = 1;
+         LED5 = 1;
          __delay_ms(50);
-         LED3 = 0;
+         LED5 = 0;
          __delay_ms(400);
-         LED3 = 1;
+         LED5 = 1;
          __delay_ms(100);
-         LED3 = 0;
+         LED5 = 0;
          __delay_ms(350);
-         LED3 = 1;
+         LED5 = 1;
          __delay_ms(150);
-         LED3 = 0;
+         LED5 = 0;
          __delay_ms(300);
-         LED3 = 1;
+         LED5 = 1;
          __delay_ms(200);
-         LED3 = 0;
+         LED5 = 0;
          __delay_ms(800);
      }
 
-     }
        if(SW5 == 0)
      {
          LED6 = 1;
@@ -382,6 +362,7 @@ so the sequence makes sense.
          LED6 = 0;
          __delay_ms(300);
      }
+       
 *
 * 5. Create a program that makes a different tone for each pushbutton.
 *    if(SW2 == 0)
